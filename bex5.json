@@ -25,8 +25,8 @@
     "SERVICE_NAME": "bex5"
   },
   "uris": [
-    "http://192.168.1.8:31000/dist/$appID/sql.tar.gz",
-    "http://192.168.1.8:31000/dist/$appID/model.tar.gz"
+    "http://192.168.1.8:31000/dist/bex5/sql.tar.gz",
+    "http://192.168.1.8:31000/dist/bex5/model.tar.gz"
   ],
   "healthChecks": [
     {
