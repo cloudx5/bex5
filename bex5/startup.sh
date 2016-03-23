@@ -20,20 +20,18 @@ echo ""
 
 sleep 10
 
-echo "开始初始化 SQL 脚本"
-
 mv -f /mnt/mesos/sandbox/sql $HOME
-echo "`ll $HOME/sql`"
-echo ""
 
 if [ -d $HOME/sql ]; then
-for II in `ls $HOME/sql`; do
-  ./mysql -uroot -px5 bex5 < $HOME/sql/$II
-  echo "$II 初始化完成..."
-done
-fi
+echo "开始初始化 SQL 脚本"
+cd $HOME/sql
+$HOME/mysql/bin/mysql -uroot -px5 bex5
+source ./00.init.sql;
+exit
+
 echo "SQL 脚本初始化完毕..."
 echo ""
+fi
 
 echo "开始启动 Apache-tomcat 服务"
 echo "正在配置服务启动参数..."
