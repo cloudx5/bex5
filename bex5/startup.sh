@@ -42,4 +42,3 @@ sed -i "s#<version>.*</version>#$tmpstr#g" $HOME/conf/server.xml
 echo "正在启动 WEB 服务..."
 cd $HOME/apache-tomcat/bin
 ./startup.sh
-
