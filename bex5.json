@@ -1,50 +1,53 @@
 {
- "id": "bex5",
- "cmd": "/usr/local/startup.sh",
- "mem": 1024,
- "cpus": 1,
- "instances": 1,
- "container": {
-   "type": "DOCKER",
-   "docker": {
-     "image": "registry.super.com/justep/bex5:latest",
-     "network": "BRIDGE",
-     "portMappings": [
-        { "containerPort": 8080, "hostPort": 0, "protocol": "tcp" }
-     ],
-    "forcePullImage":true
-   },
-   "volumes": [
-   ]
- },
- "env": {
-   "SERVICE_TAGS" : "bex5,haproxy,public,http,weight=50",
-   "SERVICE_NAME" : "bex5"
- },
- "uris": [
-   "http://192.168.1.8:31000/dist/$appID/sql.tar.gz",
-   "http://192.168.1.8:31000/dist/$appID/model.tar.gz"
- ],
- "healthChecks": [
-   {
-     "portIndex": 0,
-     "protocol": "TCP",
-     "gracePeriodSeconds": 30,
-     "intervalSeconds": 10,
-     "timeoutSeconds": 30,
-     "maxConsecutiveFailures": 3
-   },
-   {
-     "path": "/",
-     "portIndex": 0,
-     "protocol": "HTTP",
-     "gracePeriodSeconds": 30,
-     "intervalSeconds": 10,
-     "timeoutSeconds": 30,
-     "maxConsecutiveFailures": 3
-   }
- ],
- "upgradeStrategy": {
+  "id": "bex5",
+  "cmd": "/usr/local/startup.sh",
+  "mem": 512,
+  "cpus": 0.1,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "registry.super.com/justep/bex5",
+      "network": "BRIDGE",
+      "portMappings": [
+	    {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+	  ],
+      "forcePullImage": true
+    },
+    "volumes": []
+  },
+  "env": {
+    "SERVICE_TAGS": "bex5,haproxy,public,http,weight=50",
+    "SERVICE_NAME": "bex5"
+  },
+  "uris": [
+    "http://192.168.1.8:31000/dist/$appID/sql.tar.gz",
+    "http://192.168.1.8:31000/dist/$appID/model.tar.gz"
+  ],
+  "healthChecks": [
+    {
+      "portIndex": 0,
+      "protocol": "TCP",
+      "gracePeriodSeconds": 30,
+      "intervalSeconds": 10,
+      "timeoutSeconds": 30,
+      "maxConsecutiveFailures": 3
+    },
+    {
+      "path": "/",
+      "portIndex": 0,
+      "protocol": "HTTP",
+      "gracePeriodSeconds": 30,
+      "intervalSeconds": 10,
+      "timeoutSeconds": 30,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "upgradeStrategy": {
     "minimumHealthCapacity": 0.0,
     "maximumOverCapacity": 0.0
   }
