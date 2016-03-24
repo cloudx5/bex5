@@ -93,7 +93,7 @@ Darwin*) darwin=true;;
 esac
 
 # java options
-JAVA_OPTS='-server -Djava.awt.headless=true'
+JAVA_OPTS='-server -Xmx400m -Djava.awt.headless=true'
 if [ "$JUSTEP_DEBUG" = "true" ]; then  
 	JAVA_OPTS=$JAVA_OPTS" -Ddebug=true"
 fi
