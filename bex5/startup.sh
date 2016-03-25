@@ -38,22 +38,22 @@ sleep 10
 
 begin_time=$(date "+%s")
 load_script(){
-  for file_name in `ls -A $1`;do
+  for FILE_NAME in `ls -A $1`;do
     start_time=$(date "+%s")
-    if [ -s "$1/$file_name" ];then
-      ./mysql -uroot -px5 bex5 -e "source $1/$file_name"
-      echo "source:" \"$1/$file_name\" "导入成功, 用时：" `expr $(date "+%s") - ${start_time}` " 秒"
+    if [ -s "$1/$FILE_NAME" ];then
+      ./mysql -uroot -px5 bex5 -e "source $1/$FILE_NAME"
+      echo "source:$1/$FILE_NAME 导入成功, 用时：" `expr $(date "+%s") - ${start_time}` " 秒"
     fi
   done
 
   echo "SQL 脚本全部导入完毕! 共计用时: " `expr $(date "+%s") - ${begin_time}` " 秒"
 }
 
-file_path="$SRC_PATH/sql"
-file_list=`ls -A $file_path`
+FILE_PATH="$SRC_PATH/sql"
+file_list=`ls -A $FILE_PATH`
 if [ "$file_list" ];then
   echo "开始初始化 SQL 脚本..."
-  load_script $file_path
+  load_script $FILE_PATH
 fi
 
 echo "开始启动 Apache-tomcat 服务"
