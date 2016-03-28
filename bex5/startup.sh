@@ -38,19 +38,26 @@ sleep 10
 
 load_script(){
   TMP="tmp_script.sql"
+  echo "" >$TMP
   for FILE_NAME in `ls -A $1`;do
     if [ -s "$1/$FILE_NAME" ];then
       echo "source $1/$FILE_NAME;" >>$TMP
     fi
   done
-  echo "commit;"
+  echo "commit;" >>$TMP
   echo "quit" >>$TMP
+  echo "" >>$TMP
 
   cat $TMP
 
   START_TIME=$(date "+%s")
-  ./mysql -uroot -px5 bex5 -e "source $TMP"
-  echo "SQL 脚本全部导入完毕! 共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
+  ./mysql -uroot -px5 bex5 -v <$TMP >/mnt/mesos/sandbox/err.log 2 >&1
+  if [ $? -eq 0 ];then
+    echo "脚本导入成功！共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
+  else
+    echo "脚本导入失败，正在结束..."
+    exit 0
+  fi
 }
 
 FILE_PATH="$SRC_PATH/sql"
