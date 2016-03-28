@@ -36,17 +36,21 @@ echo ""
 
 sleep 10
 
-begin_time=$(date "+%s")
 load_script(){
+  TMP="tmp_script.sql"
   for FILE_NAME in `ls -A $1`;do
-    start_time=$(date "+%s")
     if [ -s "$1/$FILE_NAME" ];then
-      ./mysql -uroot -px5 bex5 -e "source $1/$FILE_NAME"
-      echo "source:$1/$FILE_NAME 导入成功, 用时：" `expr $(date "+%s") - ${start_time}` " 秒"
+      echo "source $1/$FILE_NAME;" >>$TMP
     fi
   done
+  echo "commit;"
+  echo "quit" >>$TMP
 
-  echo "SQL 脚本全部导入完毕! 共计用时: " `expr $(date "+%s") - ${begin_time}` " 秒"
+  cat $TMP
+
+  START_TIME=$(date "+%s")
+  ./mysql -uroot -px5 bex5 -e "source $TMP"
+  echo "SQL 脚本全部导入完毕! 共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
 }
 
 FILE_PATH="$SRC_PATH/sql"

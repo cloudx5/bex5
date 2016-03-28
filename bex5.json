@@ -21,13 +21,15 @@
     "volumes": []
   },
   "env": {
+    "SERVICE_NAME": "bex5",
     "SERVICE_TAGS": "haproxy,http,route_domain,weight=50",
-    "SERVICE_NAME": "bex5"
+    "SERVICE_CHECK_HTTP": "/status"
   },
   "uris": [
-    "http://192.168.1.8:31000/dist/bex5/doc.tar.gz",
-    "http://192.168.1.8:31000/dist/bex5/sql.tar.gz",
-    "http://192.168.1.8:31000/dist/bex5/model.tar.gz"
+    "http://jenkins.service.consul/dist/docker.tar.gz",
+    "http://jenkins.service.consul/dist/bex5/doc.tar.gz",
+    "http://jenkins.service.consul/dist/bex5/sql.tar.gz",
+    "http://jenkins.service.consul/dist/bex5/model.tar.gz"
   ],
   "healthChecks": [
     {
