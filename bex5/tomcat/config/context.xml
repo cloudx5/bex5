@@ -32,8 +32,8 @@
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
 
-    <Resource name="bex5" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/bex5" username="root" password="x5" maxActive="10" maxIdle="5"/>
-    <Resource name="takeout" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/bex5" username="root" password="x5" maxActive="10" maxIdle="5"/>
-    <Resource name="account" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/bex5" username="root" password="x5" maxActive="10" maxIdle="5"/>
+    <Resource name="x5" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/x5" username="root" password="x5" maxActive="10" maxIdle="5"/>
+    <Resource name="takeout" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/x5" username="root" password="x5" maxActive="10" maxIdle="5"/>
+    <Resource name="account" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/x5" username="root" password="x5" maxActive="10" maxIdle="5"/>
 
 </Context>

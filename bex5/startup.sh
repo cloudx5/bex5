@@ -16,7 +16,7 @@ if [ -d "$SRC_PATH/model" ];then
 else
   echo "APP 源码不完整，无法启动"
   echo "正在结束..."
-  exit 0
+  exit 1
 fi
 
 if [ -d "$SRC_PATH/doc" ];then
@@ -51,12 +51,12 @@ load_script(){
   cat $TMP
 
   START_TIME=$(date "+%s")
-  ./mysql -uroot -px5 bex5 -v <$TMP >/mnt/mesos/sandbox/err.log 2 >&1
+  ./mysql -uroot -px5 x5 -ve "source $TMP" >/mnt/mesos/sandbox/err.log 2>&1
   if [ $? -eq 0 ];then
-    echo "脚本导入成功！共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
+    echo "[$?]脚本导入成功！共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
   else
-    echo "脚本导入失败，正在结束..."
-    exit 0
+    echo "[$?]脚本导入失败，正在结束..."
+    exit 1
   fi
 }
 
