@@ -2,13 +2,13 @@
 
 cd `dirname $0`
 HOME=$PWD
+LIB_PATH="$HOME/runtime/BaasServer/WEB-INF/lib"
 SRC_PATH="/mnt/mesos/sandbox"
 
 echo "当前目录路径为[HOME]：$HOME"
 
-if [ -d "$SRC_PATH/model" ];then
+if [ -d "$SRC_PATH/model/UI2" ];then
   echo "正在更新 model..."
-  rm -rf $HOME/model
   mv -f $SRC_PATH/model $HOME
 
   echo "model 更新完毕"
@@ -27,6 +27,8 @@ if [ -d "$SRC_PATH/doc" ];then
   echo "doc 更新完毕"
   echo ""
 fi
+
+[ -f "$SRC_PATH/baas/baas_model_service.jar" ] && mv $SRC_PATH/baas/baas_model_service.jar $LIB_PATH
 
 cd $HOME/mysql/bin
 ./startup.sh &
@@ -51,7 +53,7 @@ load_script(){
   cat $TMP
 
   START_TIME=$(date "+%s")
-  ./mysql -uroot -px5 x5 -ve "source $TMP" >/mnt/mesos/sandbox/err.log 2>&1
+  ./mysql -uroot -px5 x5 -ve "source $TMP" >/mnt/mesos/sandbox/sqlload.log 2>&1
   if [ $? -eq 0 ];then
     echo "[$?]脚本导入成功！共计用时: " `expr $(date "+%s") - ${START_TIME}` " 秒"
   else
